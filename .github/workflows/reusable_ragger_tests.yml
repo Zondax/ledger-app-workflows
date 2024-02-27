@@ -64,6 +64,11 @@ on:
         required: false
         default: '""'
         type: string
+      additional_test_argument:
+        description: 'Additional arguments to be passed to tests'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   call_get_app_metadata:
@@ -134,7 +139,7 @@ jobs:
         env:
           CTEST_OUTPUT_ON_FAILURE: 1
           PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION: python
-        run: pytest ${{ needs.call_get_app_metadata.outputs.pytest_directory }}/ --tb=short -v --device ${{ matrix.device }} -k ${{ inputs.test_filter }}
+        run: pytest ${{ needs.call_get_app_metadata.outputs.pytest_directory }}/ --tb=short -v --device ${{ matrix.device }} -k ${{ inputs.test_filter }} ${{ inputs.additional_test_argument }}
 
       - name: Upload snapshots
         if: ${{ failure() && inputs.upload_snapshots_on_failure == true }}
