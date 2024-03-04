@@ -73,6 +73,11 @@ jobs:
         id: fetch_metadata
         run: |
           pytest_directory='${{ inputs.pytest_directory }}';
+          echo "----"
+          echo "$APP_MANIFEST"
+          echo "----"
+          ls
+          echo "----"
           if [[ ! -f "$APP_MANIFEST" ]];
           then
               >&2 echo "/!\ No $APP_MANIFEST manifest detected!";
