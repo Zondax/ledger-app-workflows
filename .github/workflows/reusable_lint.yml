@@ -48,7 +48,7 @@ jobs:
 
       - name: Install rust for Rust app
         if: ${{ needs.call_get_app_metadata.outputs.is_rust == 'true'}}
-      - uses: actions-rs/toolchain@v1
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
 
