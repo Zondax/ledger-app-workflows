@@ -9,7 +9,11 @@ from utils import run_cmd
 def save_app_params(device: str, app_build_path: Path, json_path: Path) -> None:
     metadata = run_cmd("cargo metadata --no-deps --format-version 1 --offline -q",
                        cwd=app_build_path)
+    print(metadata)
+
     metadata = json.loads(metadata)
+
+    print(metadata)
 
     rust_target = device
     c_target = device
@@ -57,6 +61,9 @@ def save_app_params(device: str, app_build_path: Path, json_path: Path) -> None:
         }
     }
 
+
+    print(ret)
+
     with open(json_path, "w") as f:
         json.dump(ret, f, indent=4)
 
@@ -77,4 +84,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    print(args)
+    
     save_app_params(args.device, args.app_build_path, args.json_path)
