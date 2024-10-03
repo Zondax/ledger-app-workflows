@@ -27,7 +27,7 @@ jobs:
       - name: Clone workflows repository
         uses: actions/checkout@v4
         with:
-          repository: LedgerHQ/ledger-app-workflows
+          repository: Zondax/ledger-app-workflows
           path: ./ledger-app-workflows
           ref: ${{ inputs.ledger-app-workflows_ref }}
 

@@ -7,12 +7,14 @@ from utils import run_cmd
 
 
 def save_app_params(device: str, app_build_path: Path, json_path: Path) -> None:
-    metadata = run_cmd("cargo metadata --no-deps --format-version 1 --offline -q",
+    metadata = run_cmd("cargo metadata --no-deps --format-version 1 --offline -q", print_output=True,
                        cwd=app_build_path)
+    print("metadata 1")
     print(metadata)
 
     metadata = json.loads(metadata)
 
+    print("metadata 2" )
     print(metadata)
 
     rust_target = device
@@ -24,6 +26,9 @@ def save_app_params(device: str, app_build_path: Path, json_path: Path) -> None:
     # find package with metadata.ledger
     packages = metadata.get("packages", [])
     package = next((pkg for pkg in packages if "metadata" in pkg and pkg["metadata"] is not None and "ledger" in pkg["metadata"]),None)
+
+    print("package" )
+    print(package )
 
     variant = package["name"]
     appname = package["metadata"]["ledger"]["name"]
@@ -62,6 +67,7 @@ def save_app_params(device: str, app_build_path: Path, json_path: Path) -> None:
     }
 
 
+    print("ret")
     print(ret)
 
     with open(json_path, "w") as f:
